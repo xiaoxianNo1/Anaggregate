@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zheng.xiaoxian.anaggregate">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MobileNoTrack.MobileNoTrackActivity" />
+        <activity android:name=".MobileNoTrack.HistoryActivity" />
+        <activity android:name=".NetworkTelephone.Model.NetwordTelephoneActivity" />
+        <activity android:name=".HismileSignIn.HismileMainActivity" />
+        <activity android:name=".AutoRotPackets.AutoRotPackActivity"></activity>
+
+        <!--<service
+            android:name=".HismileSignIn.MyAccessibilityService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/HismileSignIn"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/acc" />
+        </service>-->
+
+        <service android:name=".AutoRotPackets.AutoRotPackService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/AutoRotPack"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+
+        <intent-filter>
+            <action android:name="android.accessibilityservice.AccessibilityService" />
+        </intent-filter>
+
+        <meta-data
+            android:name="android.accessibilityservice"
+            android:resource="@xml/auto_rot_packet" />
+        </service>
+
+        <service android:name=".AutoRotPackets.WXRedPackService"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:label="抢红包"
+                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+                <!--此处必须声明一次权限-->
+
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.accessibilityservice"
+                    android:resource="@xml/auto_rot_packet" />
+            <!--指定配置文件的名字和位置-->
+
+        </service>
+
+
+    </application>
+
+</manifest>

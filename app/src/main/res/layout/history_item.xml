@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtTel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机号"/>
+    <TextView
+        android:id="@+id/txtProvince"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="省份"/>
+    <TextView
+        android:id="@+id/txtCatName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="运营商"/>
+    <TextView
+        android:id="@+id/txtCarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="归属地"/>
+    <TextView
+        android:id="@+id/txtClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击次数"/>
+    <Button
+        android:id="@+id/btnDelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除"/>
+
+</LinearLayout>

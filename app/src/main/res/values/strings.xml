@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">一个聚合</string>
+    <string name="MobileNoTrack">号码归属地查询</string>
+    <string name="History">历史查询结果</string>
+    <string name="MobileNoTrackActivityTitle">手机号码归属地查询</string>
+    <string name="HistoryActivityTitle">历史查询记录</string>
+    <string name="NetwordTelContacts">手机联系人</string>
+    <string name="HismileSignIn">海斯曼签到</string>
+    <string name="AutoRotPack">自动抢红包</string>
+</resources>
