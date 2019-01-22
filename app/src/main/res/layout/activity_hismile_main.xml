@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HismileSignIn.HismileMainActivity">
+    tools:context=".hismile_signIn.HismileMainActivity">
 
 </android.support.constraint.ConstraintLayout>

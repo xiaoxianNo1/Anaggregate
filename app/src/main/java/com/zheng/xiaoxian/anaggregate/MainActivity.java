@@ -3,50 +3,63 @@ package com.zheng.xiaoxian.anaggregate;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.zheng.xiaoxian.anaggregate.DBHelper.PermissionHelper;
-import com.zheng.xiaoxian.anaggregate.HismileSignIn.HismileMainActivity;
-import com.zheng.xiaoxian.anaggregate.MobileNoTrack.MobileNoTrackActivity;
-import com.zheng.xiaoxian.anaggregate.NetworkTelephone.Model.NetwordTelephoneActivity;
+import com.zheng.xiaoxian.anaggregate.auto_ret_packets.WXRedPackActivity;
+import com.zheng.xiaoxian.anaggregate.db_helper.apply_permissions.PermissionUtil;
+import com.zheng.xiaoxian.anaggregate.hismile_signIn.HismileMainActivity;
+import com.zheng.xiaoxian.anaggregate.mobile_no_track.MobileNoTrackActivity;
+import com.zheng.xiaoxian.anaggregate.network_telephone.NetwordTelephoneActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private PermissionHelper mPermissionHelper;
-
-    private Button btnMobileNoTrack,btnNetwordTelephone,btnHismileSignIn;
+    private Button btnMobileNoTrack,btnNetwordTelephone,btnHismileSignIn,btnWXRedPack;
 
     Intent intent;
 
+    private final int REQUEST_CODE = 1;//请求码
     //储存所有权限
     String[] allpermissions=new String[]{
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            //Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_CONTACTS,
-            Manifest.permission.BIND_ACCESSIBILITY_SERVICE,
-            Manifest.permission.CALL_PHONE,};
+            Manifest.permission.CALL_PHONE};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
-        applypermission();
+
+        //初始化并发起权限申请
+        PermissionUtil.getPermission(this,REQUEST_CODE);
+        //初始化并发起权限申请结束
+
         btnMobileNoTrack=(Button)findViewById( R.id.btnMobileNoTrack );
         btnNetwordTelephone=(Button)findViewById( R.id.btnNetwordTelephone );
         btnHismileSignIn=(Button)findViewById( R.id.btnHismileSignIn );
+        btnWXRedPack=(Button)findViewById(R.id.btnWXRedPack);
         btnMobileNoTrack.setOnClickListener( this );
         btnNetwordTelephone.setOnClickListener( this );
         btnHismileSignIn.setOnClickListener( this );
+        btnWXRedPack.setOnClickListener(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.i("request", "success");
+                } else {
+                    Log.i("request", "failed");
+                }
+                return;
+            }
+        }
     }
 
     @Override
@@ -62,40 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity( intent );
                 break;
             case R.id.btnHismileSignIn:
-                intent=new Intent( MainActivity.this,HismileMainActivity.class );
+                intent=new Intent( MainActivity.this, HismileMainActivity.class );
                 startActivity( intent );
                 break;
-        }
-    }
-
-    /**
-     * 动态申请权限
-     */
-    public void applypermission(){
-        if(Build.VERSION.SDK_INT>=23){
-            boolean needapply=false;
-            for(int i=0;i<allpermissions.length;i++){
-                int chechpermission= ContextCompat.checkSelfPermission(getApplicationContext(),
-                        allpermissions[i]);
-                if(chechpermission!=PackageManager.PERMISSION_GRANTED){
-                    needapply=true;
-                }
-            }
-            if(needapply){
-                ActivityCompat.requestPermissions(MainActivity.this,allpermissions,1);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult( requestCode, permissions, grantResults );
-        for (int i = 0; i < grantResults.length; i++) {
-            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText( MainActivity.this, permissions[i] + "已授权", Toast.LENGTH_SHORT ).show();
-            } else {
-                Toast.makeText( MainActivity.this, permissions[i] + "拒绝授权", Toast.LENGTH_SHORT ).show();
-            }
+            case R.id.btnWXRedPack:
+                intent=new Intent(MainActivity.this, WXRedPackActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }

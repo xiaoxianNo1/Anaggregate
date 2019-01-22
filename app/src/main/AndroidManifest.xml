@@ -21,15 +21,15 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MobileNoTrack.MobileNoTrackActivity" />
-        <activity android:name=".MobileNoTrack.HistoryActivity" />
-        <activity android:name=".NetworkTelephone.Model.NetwordTelephoneActivity" />
-        <activity android:name=".HismileSignIn.HismileMainActivity" />
-        <activity android:name=".AutoRotPackets.AutoRotPackActivity"></activity>
+        <activity android:name=".mobile_no_track.MobileNoTrackActivity" />
+        <activity android:name=".mobile_no_track.HistoryActivity" />
+        <activity android:name=".network_telephone.NetwordTelephoneActivity" />
+        <activity android:name=".hismile_signIn.HismileMainActivity" />
+        <activity android:name=".auto_ret_packets.WXRedPackActivity"/>
 
         <!--<service
             android:name=".HismileSignIn.MyAccessibilityService"
@@ -46,7 +46,7 @@
                 android:resource="@xml/acc" />
         </service>-->
 
-        <service android:name=".AutoRotPackets.AutoRotPackService"
+        <!--<service android:name=".auto_ret_packets.AutoRotPackService"
             android:enabled="true"
             android:exported="true"
             android:label="@string/AutoRotPack"
@@ -59,14 +59,32 @@
         <meta-data
             android:name="android.accessibilityservice"
             android:resource="@xml/auto_rot_packet" />
-        </service>
+        </service>-->
 
-        <service android:name=".AutoRotPackets.WXRedPackService"
+        <service android:name=".auto_ret_packets.WXRedPackService"
                  android:enabled="true"
                  android:exported="true"
-                 android:label="抢红包"
+                 android:label="微信抢红包"
                  android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
                 <!--此处必须声明一次权限-->
+
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.accessibilityservice"
+                    android:resource="@xml/auto_rot_packet" />
+            <!--指定配置文件的名字和位置-->
+
+        </service>
+
+        <service android:name=".auto_ret_packets.QQRedPackService"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:label="QQ抢红包"
+                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <!--此处必须声明一次权限-->
 
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

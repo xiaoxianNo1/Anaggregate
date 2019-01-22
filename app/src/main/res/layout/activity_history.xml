@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MobileNoTrack.HistoryActivity">
+    tools:context=".mobile_no_track.HistoryActivity">
     <ListView
         android:id="@+id/listMobileHistory"
         android:layout_width="match_parent"
