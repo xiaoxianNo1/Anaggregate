@@ -119,10 +119,11 @@ public class WXRedPackService extends AccessibilityService {
                         try {
                             Integer.parseInt(end);
                             //群聊
-                            showToast("消息： 私聊");
+                            //showToast("消息： 群聊");
+                            getRedMessage();
                         } catch ( Exception e ) {
                             //私聊
-                            showToast("消息： 群聊");
+                            showToast("消息： 私聊");
                         }
                     }else{
                         //私聊 默认私聊
@@ -183,17 +184,25 @@ public class WXRedPackService extends AccessibilityService {
         //获取开按钮
         List<AccessibilityNodeInfo> kaiNodes = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/cv0");
         //获取 手慢了 提示语句的控件
-        List<AccessibilityNodeInfo> slowNodes = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/c2h");
+        List<AccessibilityNodeInfo> slowNodes = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/cuz");
         //获取关闭按钮
-        List<AccessibilityNodeInfo> closeNodes = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/c07");
+        List<AccessibilityNodeInfo> closeNodes = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/cs9");
         //showToast("消息："+kaiNodes);
         if(!kaiNodes.isEmpty()){
             performClick(kaiNodes);
-            sleep(2000);
+            sleep(3000);
             closePage();
             return;
         }else{
             //手慢了 提示语句的控件
+            if(!slowNodes.isEmpty()){
+                sleep(1000);
+                for(int closeNodei=closeNodes.size()-1;closeNodei>=0;closeNodei--){
+                    AccessibilityNodeInfo closeNode=closeNodes.get(closeNodei);
+                    closeNode.performAction(AccessibilityNodeInfo.ACTION_CLICK);//点击事件
+                }
+            }
+
         }
     }
 
@@ -273,7 +282,7 @@ public class WXRedPackService extends AccessibilityService {
     }
 
     public void sleep(int millis)throws Exception{
-        Thread.sleep(3000);
+        Thread.sleep(1000);
     }
 
 }

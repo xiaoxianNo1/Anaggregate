@@ -1,11 +1,11 @@
 package com.zheng.xiaoxian.anaggregate.mobile_no_track.Model;
 
 public class Phone {
-    String telString;//手机号
-    String province;//省
-    String catName;//运营商
-    String carrier;//归属运营商
-    String click;//查询次数
+    private String telString;//手机号
+    private String province;//省
+    private String catName;//运营商
+    private String carrier;//归属运营商
+    private String click;//查询次数
 
     public String getClick() {
         return click;
@@ -57,6 +57,6 @@ public class Phone {
     }
 
     public void setCarrier(String carrier) {
-        carrier = carrier;
+        this.carrier = carrier;
     }
 }

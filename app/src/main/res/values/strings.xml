@@ -7,4 +7,7 @@
     <string name="NetwordTelContacts">手机联系人</string>
     <string name="HismileSignIn">海斯曼签到</string>
     <string name="WXRedPack">微信抢红包</string>
+    <string name="phone_num_attribution">手机号码归属地查询</string>
+    <string name="enter_phone_num">请输入手机号码</string>
+    <string name="query_results">查询结果</string>
 </resources>
