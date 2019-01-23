@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
+import com.zheng.xiaoxian.anaggregate.auto_ret_packets.Model.WXRedPack;
 
 import java.util.List;
 import java.util.Timer;
@@ -28,6 +29,7 @@ public class WXRedPackService extends AccessibilityService {
     private boolean isHandle = false;
     private boolean isDJLT=false;
     private boolean isRed=false;
+    WXRedPack wxRedPack=null;
 
 
     @Override
@@ -40,6 +42,7 @@ public class WXRedPackService extends AccessibilityService {
         // 匹配的AccessibilityEvent时调用
         if ( event.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED ) {
             //通知栏事件
+            showToast(String.valueOf(event.getEventType()));
             try {
                 if(handleNotification(event)){
                     sleep(500);
@@ -98,6 +101,7 @@ public class WXRedPackService extends AccessibilityService {
 
     //处理红包消息
     public void handleMessages(AccessibilityEvent event) throws Exception{
+        wxRedPack=new WXRedPack();
         AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
         List<AccessibilityNodeInfo> chatNodes = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/alr");//微信页里标志性的id (+)
         if(chatNodes.isEmpty()){
@@ -139,6 +143,7 @@ public class WXRedPackService extends AccessibilityService {
     //获取列表是否有红包消息
     public void getRedMessage() throws Exception{
         //在聊天页面
+        wxRedPack=new WXRedPack();
         AccessibilityNodeInfo nodeInfo =  getRootInActiveWindow();
         List<AccessibilityNodeInfo> list = nodeInfo.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/ao4");//红包消息id
 
@@ -159,7 +164,8 @@ public class WXRedPackService extends AccessibilityService {
                     node.performAction(AccessibilityNodeInfo.ACTION_CLICK);//点击事件
                     sleep(500);
                     openRedPack();
-
+                    sleep(500);
+                    closePage();
                     isRed=false;
                 }
             }
@@ -282,7 +288,7 @@ public class WXRedPackService extends AccessibilityService {
     }
 
     public void sleep(int millis)throws Exception{
-        Thread.sleep(1000);
+        Thread.sleep(1500);
     }
 
 }

@@ -1,1 +1,1 @@
-include ':app',':lmJack'
+include ':app',':lmJack', ':autoredpackhelper'

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.zheng.xiaoxian.anaggregate.R;
+import com.zheng.xiaoxian.anaggregate.auto_ret_packets.Model.WXRedPack;
 
 public class WXRedPackActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -87,4 +88,7 @@ public class WXRedPackActivity extends AppCompatActivity implements View.OnClick
         }
         return false;
     }
+
+
+
 }
