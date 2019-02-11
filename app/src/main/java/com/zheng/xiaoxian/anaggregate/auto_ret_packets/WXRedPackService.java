@@ -158,8 +158,7 @@ public class WXRedPackService extends AccessibilityService {
             }*/
         }else {
             //有 但是要检查是不是红包
-            for(int i = list.size() - 1; i >= 0; i-- ){
-                AccessibilityNodeInfo node = list.get(i);
+             for(AccessibilityNodeInfo node:list)   {
                 if(isRedPack(node)){//是红包消息
                     node.performAction(AccessibilityNodeInfo.ACTION_CLICK);//点击事件
                     sleep(500);
